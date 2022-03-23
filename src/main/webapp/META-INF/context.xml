@@ -16,7 +16,7 @@
   limitations under the License.
 -->
 <!-- The contents of this file will be loaded for each web application -->
-<Context xmlValidation="false" useHttpOnly="false">
+<Context sessionCookiePath="/">
 
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
@@ -24,18 +24,8 @@
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
-    <Manager className="org.apache.catalina.session.PersistentManager"
-             persistAuthentication="true">
-        <Store className="org.apache.catalina.session.JDBCStore"
-               connectionURL="jdbc:postgresql://localhost:5432/postgres?user=postgres&amp;password=postgres"
-               driverName="org.postgresql.Driver"
-               sessionAppCol="app_name"
-               sessionDataCol="session_data"
-               sessionIdCol="session_id"
-               sessionLastAccessedCol="last_access"
-               sessionMaxInactiveCol="max_inactive"
-               sessionTable="tomcat_sessions"
-               sessionValidCol="valid_session"
-        />
+    <Valve className="org.apache.catalina.valves.PersistentValve"/>
+    <Manager className="org.apache.catalina.session.PersistentManager">
+        <Store className="org.apache.catalina.session.FileStore" directory="${catalina.base}/temp/sessions"/>
     </Manager>
 </Context>
