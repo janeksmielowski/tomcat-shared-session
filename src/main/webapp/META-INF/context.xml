@@ -26,6 +26,8 @@
 
     <Valve className="org.apache.catalina.valves.PersistentValve"/>
     <Manager className="org.apache.catalina.session.PersistentManager">
-        <Store className="org.apache.catalina.session.FileStore" directory="${catalina.base}/temp/sessions"/>
+        <Store className="org.apache.catalina.session.FileStore"
+               directory="${catalina.base}/sessions"
+        />
     </Manager>
 </Context>
